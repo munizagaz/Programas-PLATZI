@@ -26,8 +26,8 @@ const spanVidasPC = document.getElementById("enemigo-vidas");
 const contenedorTarjetas = document.getElementById("contenedor-tarjetas")
 const contenedorAtaques = document.getElementById("contenedor-ataques")
 const spanMascotaJugador = document.getElementById("mascota-jugador");
-let spanFotoMascotaJugador = document.getElementById("ataques-jugador")
-let spanFotoMascotaEnemigo = document.getElementById("ataques-enemigo")
+const spanFotoMascotaJugador = document.getElementById("ataques-jugador")
+const spanFotoMascotaEnemigo = document.getElementById("ataques-enemigo")
 
 let radioHipodoge
 let radioCapipepo
@@ -235,8 +235,8 @@ function agregarFotoMascota(){
     let fotoJugador
     let fotoEnemigo
 
-    let objetoImgJugador
-    let objetoImgEnemigo
+    //let objetoImgJugador
+    //let objetoImgEnemigo
 
    //agrego foto del jugador
     mokepones.forEach((mokeponj)=>{
@@ -246,8 +246,8 @@ function agregarFotoMascota(){
             <img id="imagen-jugador" src=${mokeponj.foto} alt=${mokeponj.nombre} >
             `
             spanFotoMascotaJugador.innerHTML = fotoJugador
-            objetoImgJugador = spanFotoMascotaJugador
-            objetoImgJugador.style.width = '80px'
+            //objetoImgJugador = spanFotoMascotaJugador
+            //objetoImgJugador.style.width = '80px'
         }
     })
 
@@ -259,8 +259,8 @@ function agregarFotoMascota(){
             <img id="imagen-enemigo" src=${mokeponE.foto} alt=${mokeponE.nombre} >
             `
             spanFotoMascotaEnemigo.innerHTML = fotoEnemigo
-            objetoImgEnemigo = spanFotoMascotaEnemigo
-            objetoImgEnemigo.style.width = '80px'
+            //objetoImgEnemigo = spanFotoMascotaEnemigo
+            //objetoImgEnemigo.style.width = '80px'
         }
     })
 }
@@ -306,6 +306,9 @@ function ataqueMascotaPC(){
 
 function atacar(){
 
+    let nuevoAtaqueDelJugador
+    let nuevoAtaqueDelEnemigo
+
     totalEmpates = 0
     totalGanadosEnemigo = 0
     totalGanadosJugador = 0
@@ -324,7 +327,17 @@ function atacar(){
         }else{
             totalGanadosEnemigo += 1
         }
+
+        nuevoAtaqueDelJugador=document.createElement('p')
+        nuevoAtaqueDelEnemigo=document.createElement('p')
+
+        nuevoAtaqueDelJugador.innerHTML = arregloAtaqueJugador[i]
+        nuevoAtaqueDelEnemigo.innerHTML = ataquePC[i]
+
+        ataquesDelJugador.appendChild(nuevoAtaqueDelJugador)
+        ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
     }
+    
 
     console.log('GANADOS JUGADOR: ' + totalGanadosJugador)
     console.log('GANADOS ENEMIGO: ' + totalGanadosEnemigo)
