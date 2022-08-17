@@ -1,4 +1,21 @@
 
+class Mokepon {
+    constructor(nombre,foto,vida){
+        this.nombre = nombre
+        this.foto = foto
+        this.vida = vida
+        this.ataques = []
+        this.x = 20
+        this.y = 30
+        this.ancho = 60
+        this.alto = 60
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = foto
+        this.velocidadX = 0
+        this.velocidadY = 0
+    }
+}
+
 let ataquePC = [];
 let vidasJugador = 3;
 let vidasPC = 3;
@@ -43,22 +60,6 @@ let radioPydos
 let btnFuego
 let btnTierra
 let btnAgua
-
-class Mokepon {
-    constructor(nombre,foto,vida){
-        this.nombre = nombre
-        this.foto = foto
-        this.vida = vida
-        this.ataques = []
-        this.x = 20
-        this.y = 30
-        this.ancho = 60
-        this.alto = 60
-        this.mapaFoto = new Image()
-        this.mapaFoto.src = foto
-    }
-}
-
 let hipodogue = new Mokepon ('HIPODOGUE','./assets/mokepons_mokepon_hipodoge_attack.png',5)
 let capipepo = new Mokepon ('CAPIPEPO','./assets/mokepons_mokepon_capipepo_attack.png',5)
 let ratigueya = new Mokepon ('RATIGUEYA','./assets/mokepons_mokepon_ratigueya_attack.png',5)
@@ -69,6 +70,10 @@ let pydos = new Mokepon ('PYDOS','./assets/pydos.png',5)
 let mokepones = []
 let mascotaJugador
 let mascotaEnemigo
+let intervalo
+let mapaBackgroud = new Image()
+
+mapaBackgroud.src = "./assets/mokemap.png"
 
 hipodogue.ataques.push(
     { nombre: '💧', id: 'boton-agua'},
@@ -289,8 +294,8 @@ function seleccionarMascotaPC (){
     seccionMascota.style.display = "none";
     
     seccionVerMapa.style.display = "flex"
-    
-    pintarPersonaje()
+
+    iniciarMapa()
 
     //agregarFotoMascota()
 
@@ -388,13 +393,28 @@ function reiniciarJuego(){
     location.reload();
 }
 
-function pintarPersonaje(){
-
-    //limpio el mapa
-    lienzo.clearRect(0,0,mapa.width,mapa.height,)
+function pintarCanvas(){
 
     mokepones.forEach((mokepon)=>{
         if(mokepon.nombre === mascotaJugador){
+
+            mokepon.x += mokepon.velocidadX
+            mokepon.y += mokepon.velocidadY
+
+            //limpio el mapa
+            lienzo.clearRect(
+                0,
+                0,
+                mapa.width,
+                mapa.height,)
+            //pinto el fondo del mapa
+            lienzo.drawImage(
+                mapaBackgroud,
+                0,
+                0,
+                mapa.width,
+                mapa.height)
+            //pinto el mokepon en el mapa
             lienzo.drawImage(
                 mokepon.mapaFoto,
                 mokepon.x,
@@ -407,16 +427,101 @@ function pintarPersonaje(){
     
 }
 
-function moverPersonaje(){
+function moverDerecha(){
 
     mokepones.forEach((mokepon)=>{
         if(mokepon.nombre === mascotaJugador){
-            mokepon.x += 5
+            mokepon.velocidadX = 5
         }
         
     })
 
-    pintarPersonaje()
+}
+
+function moverIzquierda(){
+
+    mokepones.forEach((mokepon)=>{
+        if(mokepon.nombre === mascotaJugador){
+            mokepon.velocidadX = -5
+        }
+        
+    })
+
+}
+
+function moverArriba(){
+
+    mokepones.forEach((mokepon)=>{
+        if(mokepon.nombre === mascotaJugador){
+            mokepon.velocidadY = -5
+        }
+        
+    })
+
+}
+
+function moverAbajo(){
+
+    mokepones.forEach((mokepon)=>{
+        if(mokepon.nombre === mascotaJugador){
+            mokepon.velocidadY = 5
+        }
+        
+    })
+
+}
+
+function detenerMovimiento(){
+    mokepones.forEach((mokepon)=>{
+        if(mokepon.nombre === mascotaJugador){
+            mokepon.velocidadX = 0
+            mokepon.velocidadY = 0
+        }
+        
+    })
+
+}
+
+function sePresionoUnaTecla(event){
+
+    switch (event.key) {
+        case "ArrowUp":
+            moverArriba()
+            break;
+        case "w":
+            moverArriba()
+            break;
+        case "ArrowDown":
+            moverAbajo()
+            break;
+        case "s":
+            moverAbajo()
+            break;
+        case "ArrowLeft":
+            moverIzquierda()
+            break;
+        case "a":
+            moverIzquierda()
+            break;
+        case "ArrowRight":
+            moverDerecha()
+            break;
+        case "d":
+            moverDerecha()
+            break;
+    }
+
+}
+
+function iniciarMapa(){
+
+    mapa.width = 320
+    mapa.height = 240
+
+    intervalo = setInterval(pintarCanvas,50)
+
+    window.addEventListener("keydown", sePresionoUnaTecla)
+    window.addEventListener("keyup", detenerMovimiento)
 
 }
 
