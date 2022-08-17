@@ -28,6 +28,10 @@ const contenedorAtaques = document.getElementById("contenedor-ataques")
 const spanMascotaJugador = document.getElementById("mascota-jugador");
 const spanFotoMascotaJugador = document.getElementById("ataques-jugador")
 const spanFotoMascotaEnemigo = document.getElementById("ataques-enemigo")
+const seccionVerMapa = document.getElementById("ver-mapa")
+const mapa = document.getElementById("mapa")
+
+let lienzo = mapa.getContext("2d")
 
 let radioHipodoge
 let radioCapipepo
@@ -46,6 +50,12 @@ class Mokepon {
         this.foto = foto
         this.vida = vida
         this.ataques = []
+        this.x = 20
+        this.y = 30
+        this.ancho = 60
+        this.alto = 60
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = foto
     }
 }
 
@@ -130,6 +140,7 @@ function iniciarJuego(){
 
     seccionAtaques.style.display = "none";
     seccionReiniciar.style.display = "none"
+    seccionVerMapa.style.display = "none"
     btnReiniciar.addEventListener("click", reiniciarJuego);
 
 }
@@ -273,14 +284,17 @@ function seleccionarMascotaPC (){
     spanMascotaEnemigo.innerHTML = mascotaEnemigo
     arregloAtaqueEnemigo = mokepones[mascotaPC].ataques
 
-    seccionAtaques.style.display = "flex";
+    //seccionAtaques.style.display = "flex";
+    seccionAtaques.style.display = "none";
     seccionMascota.style.display = "none";
-
-    //console.log(arregloAtaqueEnemigo)
     
-    agregarFotoMascota()
+    seccionVerMapa.style.display = "flex"
+    
+    pintarPersonaje()
 
-    ataqueMascotaPC()
+    //agregarFotoMascota()
+
+    //ataqueMascotaPC()
 }
 
 function ataqueMascotaPC(){
@@ -372,6 +386,38 @@ function mensajeFinal (resultado){
 
 function reiniciarJuego(){
     location.reload();
+}
+
+function pintarPersonaje(){
+
+    //limpio el mapa
+    lienzo.clearRect(0,0,mapa.width,mapa.height,)
+
+    mokepones.forEach((mokepon)=>{
+        if(mokepon.nombre === mascotaJugador){
+            lienzo.drawImage(
+                mokepon.mapaFoto,
+                mokepon.x,
+                mokepon.y,
+                mokepon.alto,
+                mokepon.ancho)
+        }
+        
+    })
+    
+}
+
+function moverPersonaje(){
+
+    mokepones.forEach((mokepon)=>{
+        if(mokepon.nombre === mascotaJugador){
+            mokepon.x += 5
+        }
+        
+    })
+
+    pintarPersonaje()
+
 }
 
 window.addEventListener("load", iniciarJuego);
