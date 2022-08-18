@@ -1,6 +1,6 @@
 
 class Mokepon {
-    constructor(nombre,foto,vida){
+    constructor(nombre,foto,vida,x = 10,y=10,fotoMapa){
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
@@ -10,7 +10,7 @@ class Mokepon {
         this.ancho = 60
         this.alto = 60
         this.mapaFoto = new Image()
-        this.mapaFoto.src = foto
+        this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
         this.velocidadY = 0
     }
