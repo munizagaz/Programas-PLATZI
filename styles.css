@@ -142,11 +142,11 @@ h2{
     align-items: center;
     justify-content: center;
 }
-#mapa{
+/*#mapa{
     border: solid;
     border-color: black;
     border-width: 2px;
-}
+}*/
 @media(max-width: 360px){
     .labels{
         display: flex;
