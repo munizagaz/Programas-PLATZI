@@ -1,0 +1,177 @@
+@font-face {
+    font-family: 'FredokaOne';
+    src: url('./fonts/FredokaOne-Regular.ttf');
+}
+body{
+    color: white;
+    background-color:cadetblue;
+    font-family: 'FredokaOne', sans-serif;
+}
+
+#elije-mascota{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+#elije-ataque{
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+input{
+    display: none;
+}
+input:checked + label{
+    background-color: red;
+}
+.mascota {
+    width: 160px;
+    height: 160px;
+    background-color: green;
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 15%;
+    text-align: center;
+}
+.mascota img, #imagen-enemigo, #imagen-jugador {
+    width: 80px;
+}
+#imagen-enemigo, #imagen-jugador {
+    width: 110px;
+}
+.labels{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+#boton-mascota{
+    border-style: solid;
+    border-width: 2px;
+    width: 180px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: transparent;
+    border-color: white;
+    color:white;
+    font-size: 15;
+    margin-top: 20px;
+}
+.boton-ataque{
+    border-style: solid;
+    border-width: 2px;
+    width: 90px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: green;
+    border-color: white;
+    color:white;
+    font-size: 15;
+    margin-top: 20px;
+}
+.boton-ataque:focus{
+    background-color: red;
+}
+h1{
+    font-size: 50px;
+}
+h2{
+    font-size: 25px;
+}
+#mensajes{
+    width: 280px;
+    background: green;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 20px;
+    text-align: center;
+}
+#boton-reiniciar{
+    border-style: solid;
+    border-width: 2px;
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: green;
+    border-color: white;
+    color:white;
+    font-size: 15;
+    margin-top: 20px;
+}
+.ataques{
+    display: grid;
+    grid-template-columns: 160px 160px;
+    justify-items: center;
+    
+}
+.ataques-jugador, .ataques-enemigo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#jugador-vidas, #enemigo-vidas{
+    font-size: 40px;
+    margin: 0px;
+    background-color: green;
+    width: 120px;
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 9px;
+    border-color: black;
+}
+#lista-ataques{
+    display: grid;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 160px 160px;
+}
+#ataques-del-jugador, #ataques-del-enemigo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#ver-mapa{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#ver-mapa button{
+    border-style: solid;
+    border-width: 2px;
+    width: 90px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: green;
+    border-color: white;
+    color:white;
+    font-size: 15;
+    margin: 5px 0px 0px;
+}
+#ver-mapa div{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+@media(max-width: 1060px){
+    .labels{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+    }
+    .boton-ataque{
+        margin-top: 5px;
+    }
+    .botones-ataques{
+        display: flex;
+        flex-direction: column;
+    }
+    
+}
